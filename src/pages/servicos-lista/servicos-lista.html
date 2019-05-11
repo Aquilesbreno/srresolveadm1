@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar color="blue">
+    <ion-title>Lista de Servicos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let item of servicos | async">
+            <h2> {{item.data.name}} </h2>
+            <ion-avatar item-start>
+
+                <img src="{{ item.data.imgUrl }}" class="img-thumbnail" style="max-width: 100px;" [hidden]="item.data.imgUrl==''">
+            </ion-avatar>
+            <ion-avatar item-end>
+                  <button ion-fab mini color="secondary" (click)=editItemServicos(item)><ion-icon name="create"></ion-icon></button>
+                  <button ion-fab mini color="danger" (click)="removeItemServicos(item.key,item.data.imgUrl !='')"><ion-icon name="trash"></ion-icon></button>
+            </ion-avatar>
+            <p text-right>A partir de:{{ item.data.price | currency:'BRL':true }}</p>
+            <p>Categoria:{{ item.data.categoryName }}</p>
+            <p text-wrap>Descrição: {{ item.data.description}}</p>
+
+        </ion-item>
+      </ion-list>
+
+
+ <ion-fab right bottom>
+   <!--newItemProdutos é um método na classe produtos-lista.ts-->
+      <button ion-fab (click)="newItemServicos()"> <ion-icon name="add"></ion-icon> </button>
+  </ion-fab>
+</ion-content>
